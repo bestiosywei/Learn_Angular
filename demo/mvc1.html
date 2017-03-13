@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MyModel">
+<head>
+	<meta charset="UTF-8">
+	<title>index</title>
+</head>
+<body>
+	<div ng-controller="helloA">
+		<p>hello, {{greeting.text}}</p>
+	</div>
+
+	<hello></hello>
+
+	<!-- 数据模型,这个是在该模型下的作用域中-->
+	<input ng-model="hello.text" />
+	<p>{{hello.text}}, cc</p>
+
+	<!-- 作用域 -->
+	<div>
+		<div ng-controller="GreetCtrl">
+			hello {{name}}
+		</div>
+		<div ng-controller="ListCtrl">
+			<ol>
+				<li ng-repeat="name in names">
+					{{name}} from {{department}}
+				</li>
+			</ol>
+		</div>
+	</div>
+
+	<script src="angular.min.js"></script>
+	 <script>
+	 // 模块的依赖
+	 	var myModel = angular.module('MyModel', []);
+	 	// 指令的定义
+	 	myModel.directive('hello', function(){
+	 		return {
+	 			restrict: 'E',
+	 			template: '<div>hello angular</div>',
+	 			replace: true
+	 		}
+	 	});
+	 	// controller的定义 ng-controller
+	 	myModel.controller('helloA', function($scope){
+	 		$scope.greeting = {
+	 			text: 'cc'
+	 		}
+	 	});
+	 	// 函数的$scope 根作用域
+	 	myModel.controller('GreetCtrl', function($scope, $rootScope){
+	 		$scope.name = 'world';
+	 		$rootScope.department = 'angular';
+	 	});
+	 	myModel.controller('ListCtrl', function($scope){
+	 		$scope.names = ['ann', 'lisa', 'jin'];
+	 	});
+	 	 
+
+	 </script>
+</body>
+</html>

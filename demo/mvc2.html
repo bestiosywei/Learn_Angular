@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MyModel">
+<head>
+	<meta charset="UTF-8">
+	<title>index</title>
+</head>
+<body>
+	<div ng-controller="EventController">
+		post scope
+		<tt>MyEvent</tt>count:{{count}}
+		<ul>
+		<!-- repeat可以是一个数字， -->
+			<li ng-repeat="i in [1]" ng-controller="EventController">
+				<button ng-click="$emit('MyEvent')">
+					$emit('MyEvent')
+				</button>
+				<button ng-click="$broadcast('MyEvent')">
+					$broadcast('MyEvent')
+				</button>
+				<br/>
+				middle scope
+				<tt>MyEvent</tt>count:{{count}}
+				<ul>
+					<li ng-repeat="item in [1,2]" ng-controller="EventController">
+						leaf scope
+						<tt>MyEvent</tt>count:{{count}}
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<script src="angular.min.js"></script>
+	 <script>
+	 	var myModel = angular.module('MyModel', []);
+	 	myModel.controller('EventController', function($scope){
+	 		$scope.count = 0;
+	 		$scope.$on('MyEvent', function(){
+	 			$scope.count++;
+	 		});
+	 	});
+	 	 /*
+	 	$emit只能向parent controller传递event与data
+		$broadcast只能向child controller传递event与data
+		$on用于接收event与data
+	 	  */
+
+	 </script>
+</body>
+</html>
