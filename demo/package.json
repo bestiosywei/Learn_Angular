@@ -1,0 +1,7 @@
+{
+  "name": "some exercise",
+  "description": "some exercise for angular",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true
+}

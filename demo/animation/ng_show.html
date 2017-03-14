@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myShowModel">
+<head>
+	<meta charset="UTF-8">
+	<title>双向数据绑定的css的应用</title>
+	<style>
+		.error {
+			background-color: red;
+		}
+		.warning {
+			background-color: yellow;
+		}
+	</style>
+	<script src="../lib/angular.js"></script>
+</head>
+<body>
+	<div ng-controller="myShowCtrl">
+		<button ng-click="toggleMeun()">toggle Menu</button>
+		<ul ng-show="menuState.show">
+			<li ng-click="stun()">stun</li>
+			<li ng-click="disintegrate()">disintegrate</li>
+			<li ng-click="erase()">disintegrate from history</li>
+		</ul>
+	</div>
+	<script>
+	 	var myShowModel = angular.module('myShowModel', []);
+	 	myShowModel.controller('myShowCtrl', ['$scope', function($scope){
+	 		$scope.menuState = {
+	 			show: false
+	 		};
+	 		$scope.toggleMeun = function() {
+	 			$scope.menuState.show = !$scope.menuState.show;
+	 		}
+	 	}]);
+	</script>
+</body>
+</html>

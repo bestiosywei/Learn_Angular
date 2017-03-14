@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myClassModel">
+<head>
+	<meta charset="UTF-8">
+	<title>双向数据绑定的css的应用</title>
+	<style>
+		.error {
+			background-color: red;
+		}
+		.warning {
+			background-color: yellow;
+		}
+	</style>
+	<script src="../lib/angular.js"></script>
+</head>
+<body>
+	<div ng-controller="myClassCtrl">
+		<div ng-class="{error: isError, warning: isWarning}">{{messageText}}</div>
+		<button ng-click="showError()">simulate Error</button>
+		<button ng-click="showWarning()">simulate Warning</button>
+	</div>
+	<script>
+	 	var myClassModel = angular.module('myClassModel', []);
+	 	myClassModel.controller('myClassCtrl', ['$scope', function($scope){
+	 		$scope.isError = false;
+	 		$scope.isWarning = false;
+	 		$scope.showError = function() {
+	 			$scope.isError = true;
+	 			$scope.isWarning = false;
+	 			$scope.messageText = 'this is an error message';
+	 		}
+	 		$scope.showWarning = function() {
+	 			$scope.isError = false;
+	 			$scope.isWarning = true;
+	 			$scope.messageText = 'this is an warning message';
+	 		}
+	 	}]);
+	</script>
+</body>
+</html>

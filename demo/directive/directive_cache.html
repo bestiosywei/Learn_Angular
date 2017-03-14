@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>directive_cache</title>
+	<script src="../lib/angular.js"></script>
+</head>
+<body>
+	<hello></hello>
+	<div class="hello"></div>
+	<div hello></div>
+	<!-- directive:hello -->
+	<login></login>
+	<script>
+	 	var myApp = angular.module('myApp', []);
+	 	myApp.directive('hello', function(){
+	 		return {
+	 			restrict: 'AEMC',
+	 			template: '<div>hi everyone</div>',
+	 			replace: true
+	 		}
+	 	});
+	 	// 需要使用服务器启动，不然出现跨域
+	 	myApp.directive('login', function(){
+	 		return {
+	 			restrict: 'AE',
+	 			templateUrl: 'login.html'
+	 		}
+	 	});
+	</script>
+</body>
+</html>

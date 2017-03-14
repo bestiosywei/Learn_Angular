@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="cssModule">
+<head>
+	<meta charset="UTF-8">
+	<title>双向数据绑定的css的应用</title>
+	<style>
+		.text-red {
+			color: #fff;
+			background-color: red;
+		}
+		.text-green {
+			color: #fff;
+			background-color: green;
+		}
+	</style>
+	<script src="../lib/angular.js"></script>
+</head>
+<body>
+	<div ng-controller="cssCtrl">
+		<p class="text-{{color}}">测试css样式</p>
+		<button ng-click="setGreen()">绿色</button>
+	</div>
+	<script>
+	 	var cssModule = angular.module('cssModule', []);
+	 	cssModule.controller('cssCtrl', ['$scope', function($scope){
+	 		$scope.color = 'red';
+	 		$scope.setGreen = function() {
+	 			$scope.color = 'green';
+	 		}
+	 	}]);
+	</script>
+</body>
+</html>
