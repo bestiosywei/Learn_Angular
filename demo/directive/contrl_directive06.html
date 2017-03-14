@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>指令与控制器的之间的通信</title>
+	<script src="../lib/angular.js"></script>
+</head>
+<body>
+	<div ng-controller="myCtrl">
+		Ctrl
+		<input type="text" ng-model="ctrlFlavor">
+		<br/>
+		directive
+		<drink flavor="ctrlFlavor"></drink>
+	</div>
+	<script>
+	// @----把当前属性作为字符串传递，你还可以绑定来自外层的scope的值，
+	// 在属性值中插入{{}}即可
+	// = 与父scope的属性进行双向绑定
+	// & 传递一个来自父scope函数，稍后调用
+		var myApp = angular.module('myApp', []);
+		myApp.controller('myCtrl', ['$scope', function($scope){
+			$scope.contrlFlavor = '百威';
+		}]);
+	 	myApp.directive('drink', function(){
+	 		return {
+	 			restrict: 'AE',
+	 			template: '<input type="text" ng-model="flavor"/>',
+	 			scope: {
+	 				flavor: '='
+	 			}	
+	 		}
+	 	});
+	</script>
+</body>
+</html>

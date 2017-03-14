@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>指令的复用</title>
+	<script src="../lib/angular.js"></script>
+</head>
+<body>
+	<div ng-controller="myCtrl">
+		<loader howToLoad="loadData()">滑动加载</loader>
+	</div>
+	<div ng-controller="myCtrl2">
+		<loader howToLoad="loadData2()">滑动加载2222</loader>
+	</div>
+	<script>
+		var myApp = angular.module('myApp', []);
+		// 指令的复用
+	 	myApp.controller('myCtrl', ['$scope', function($scope){
+	 		$scope.loadData = function() {
+	 			console.log('数据加载中...');
+	 		};
+	 	}]);
+
+	 	myApp.controller('myCtrl2', ['$scope', function($scope){
+	 		$scope.loadData2 = function() {
+	 			console.log('数据加载中22222...');
+	 		};
+	 	}]);
+
+	 	myApp.directive('loader', function(){
+	 		return {
+	 			restrict: 'AE',
+	 			// 给元素绑定事件，是在link
+	 			link: function(scope, element, attrs){
+	 				element.bind('mouseenter', function(){
+	 					// 注意在html的属性是驼峰式命名，这里需要变成全部的小写
+	 					scope.$apply(attrs.howtoload);
+	 				});
+	 			}
+	 		}
+
+	 	});
+	</script>
+</body>
+</html>

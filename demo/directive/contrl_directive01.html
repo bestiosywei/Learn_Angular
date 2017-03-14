@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>link</title>
+	<script src="../lib/angular.js"></script>
+</head>
+<body>
+	<div ng-controller="myCtrl">
+		<loader howToLoad="loadData()">滑动加载</loader>
+	</div>
+	<script>
+		var myApp = angular.module('myApp', []);
+	 	myApp.controller('myCtrl', ['$scope', function($scope){
+
+	 		$scope.loadData = function() {
+	 			console.log('数据加载中...');
+	 		};
+
+	 	}]);
+
+	 	myApp.directive('loader', function(){
+	 		return {
+	 			restrict: 'AE',
+	 			// 给元素绑定事件，是在link
+	 			link: function(scope, element, attrs){
+	 				element.bind('mouseenter', function(){
+	 					scope.loadData();
+	 				});
+	 			}
+	 		}
+
+	 	});
+	</script>
+</body>
+</html>

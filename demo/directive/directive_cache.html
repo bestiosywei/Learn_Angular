@@ -7,26 +7,24 @@
 </head>
 <body>
 	<hello></hello>
-	<div class="hello"></div>
-	<div hello></div>
-	<!-- directive:hello -->
-	<login></login>
 	<script>
+	//模板缓存起来跟直接templateUrl再调用一遍什么区别 
+	// 模版缓存可以提高性能，使用templateUrl时，每次ng都需要编译
 	 	var myApp = angular.module('myApp', []);
-	 	myApp.directive('hello', function(){
+
+	 	// run方法在angular所有的依赖注入完之后，
+	 	// run方法应用一次。
+	 	myApp.run(function($templateCache){
+	 		$templateCache.put('hello.html','<div>hello angular!</div>')
+	 	})
+	 	myApp.directive('hello', function($templateCache){
 	 		return {
 	 			restrict: 'AEMC',
-	 			template: '<div>hi everyone</div>',
+	 			template: $templateCache.get('hello.html'),
 	 			replace: true
 	 		}
 	 	});
-	 	// 需要使用服务器启动，不然出现跨域
-	 	myApp.directive('login', function(){
-	 		return {
-	 			restrict: 'AE',
-	 			templateUrl: 'login.html'
-	 		}
-	 	});
+	 	
 	</script>
 </body>
 </html>

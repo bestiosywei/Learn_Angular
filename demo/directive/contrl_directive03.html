@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>指令之间的交互</title>
+	<script src="../lib/angular.js"></script>
+	<style>
+		.btn {
+			display: inline-block;
+			padding: 20px;
+			color: #fff;
+			background: blue;
+			border: 1px solid #ccc;
+		}
+	</style>
+</head>
+<body>
+	<superman strength>strength</superman>
+	<superman strength speed>strength speed</superman>
+	<superman strength speed light>strength speed light</superman>
+	<script>
+		var myApp = angular.module('myApp', []);
+		myApp.directive('superman', function(){
+			return {
+				scope: { },
+				// 定义独立的作用域
+				restrict: 'AE',
+				controller: function($scope){
+					$scope.abilities = [];
+					this.addStrength = function() {
+						$scope.abilities.push('strength');
+					};
+					this.addSpeed = function() {
+						$scope.abilities.push('speed');
+					};
+					this.addLight = function() {
+						$scope.abilities.push('light');
+					};
+				},
+				link: function(scope, element, attrs) {
+					element.addClass('btn');
+					element.bind('mouseenter', function(){
+						console.log(scope.abilities);
+					});
+				}
+			}
+		});
+
+	 	myApp.directive('strength', function(){
+	 		return {
+	 			// 依赖于superman
+	 			require:'^superman',
+	 			// 给元素绑定事件，是在link
+	 			link: function(scope, element, attrs, supermanCtrl){
+	 				supermanCtrl.addStrength();
+	 			}
+	 		}
+	 	});
+
+	 	myApp.directive('speed', function(){
+	 		return {
+	 			// 依赖于superman
+	 			require:'^superman',
+	 			// 给元素绑定事件，是在link
+	 			link: function(scope, element, attrs, supermanCtrl){
+	 				supermanCtrl.addSpeed();
+	 			}
+	 		}
+	 	});
+
+	 	myApp.directive('light', function(){
+	 		return {
+	 			// 依赖于superman
+	 			require:'^superman',
+	 			// 给元素绑定事件，是在link
+	 			link: function(scope, element, attrs, supermanCtrl){
+	 				supermanCtrl.addLight();
+	 			}
+	 		}
+	 	});
+	</script>
+</body>
+</html>

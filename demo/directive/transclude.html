@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>transclude</title>
+	<script src="../lib/angular.js"></script>
+</head>
+<body>
+	<hello>
+	<!-- 因为transclude为true，而且ng-transclude这个指令，所以这个内容不会被替换 -->
+		<div>这里是指令内部的内容</div>
+	</hello>
+	<script>
+	 	var myApp = angular.module('myApp', []);
+	 	
+	 	myApp.directive('hello', function($templateCache){
+	 		return {
+	 			restrict: 'AE',
+	 			template: '<div>hello angular!<div ng-transclude></div></div>',
+	 			transclude: true
+	 		}
+	 	});
+	 	
+	</script>
+</body>
+</html>

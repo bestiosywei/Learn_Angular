@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>replace</title>
+	<script src="../lib/angular.js"></script>
+</head>
+<body>
+	<hello>
+	<!-- 通过指令里面的replace为true，这里面
+	的内容，被替换了 -->
+		<div>这里是指令内部的内容</div>
+	</hello>
+	<script>
+	 	var myApp = angular.module('myApp', []);
+	 	
+	 	myApp.directive('hello', function($templateCache){
+	 		return {
+	 			restrict: 'AE',
+	 			template: '<div>hello angular!</div>',
+	 			replace: true
+	 		}
+	 	});
+	 	
+	</script>
+</body>
+</html>
