@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>内置指令的应用</title>
+	<script src="../lib/angular.js"></script>
+</head>
+<body>
+	<div ng-controller="formController">
+	<!-- novalidate不对表单进行验证 -->
+		<form name="form" novalidate>
+			name：<input type="text" name="uName" ng-model="user.userName" required/><br/>
+			Email：<input type="email" name="uEmail" ng-model="user.email" required/><br/>
+			<!-- $dirty	表单有填写记录
+				 $valid	字段内容合法的
+				 $invalid	字段内容是非法的
+                 $pristine	表单没有填写记录 -->
+			<div ng-show="form.uEmail.$dirty && form.uEmail.$invalid">
+				Invalid:
+				<span ng-show="form.uEmail.$error.required">tell us you email</span>
+				<span ng-show="form.uEmail.$error.email">this is not valid email</span>
+			</div>
+			Gender：<br/>
+			<input type="radio" ng-model="user.gender" value="male"/>
+			male：
+			<input type="radio" ng-model="user.gender" value="female"/>
+			female：<br/>
+			i agree:
+			<input type="checkbox" name="userAgree" ng-model="user.agree" required ><br/>
+			<input type="text" ng-show="user.agree" ng-model="user.agreeSign" required><br/>
+			<div ng-show="!user.agree || !user.agreeSign">
+				please agree and sign
+			</div>
+			<br/>
+			<button ng-click="reset()" ng-disabled="form.$invalid || isUnchanged(user)">Reset</button>
+			<button ng-click="update(user)" ng-disabled="form.$invalid || isUnchanged(user)">SAVE</button>
+		</form>
+	</div>
+	<script>
+	 	var myApp = angular.module('myApp', []);
+	 	myApp.controller('formController', ['$scope', function($scope){
+
+	 		// 声明一个空的对象
+	 		$scope.master = {};
+	 		// 重置表单
+	 		$scope.reset = function() {
+	 			// 重置表单的时候,把表单数据重置为空对象
+	 			$scope.user = angular.copy($scope.master);
+	 		};
+	 		/*
+	 		copy(source,destination)，它会对source对象执行深拷贝
+	 		 */
+	 		// 更新表单----save
+	 		$scope.update = function() {
+	 			// 把user的对象的值，赋值给master,
+	 			// 然后执行保存按钮的更新事件
+	 			$scope.master = angular.copy($scope.user);
+	 		};
+	 		// 表单是否改变
+	 		$scope.isUnchanged = function() {
+	 			// 比较这两个对象是否相等 ===
+	 			return angular.equals($scope.user, $scope.master);
+	 		};
+	 		$scope.reset();
+	 	}]);
+	</script>
+</body>
+</html>

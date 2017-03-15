@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>自定义指令</title>
+	<script src="../lib/angular.js"></script>
+</head>
+<body>
+	<div ng-controller="someController">
+	<!-- 指令的属性expander-title与模板的title的值，与父属性的scope双向数据绑定 -->
+		<expander class="expander" expander-title="title">
+			{{text}}
+		</expander>!
+	</div>
+	<script>
+	 	var myApp = angular.module('myApp', []);
+	 	myApp.controller('someController', ['$scope', function($scope){
+	 		$scope.title = '点击展开';
+	 		$scope.text = '这里是内部的内容';
+	 	}]);
+
+	 	// 自定义指令
+	 	myApp.directive('expander', function(){
+	 		return {
+	 			restrict: 'EA',
+	 			replace: true,
+	 			transclude: true,
+	 			scope: {
+	 				// 等于是双向数据绑定，该模板的title与expander-title绑定
+	 				title:'=expanderTitle'
+	 			},
+	 			template: '<div>'
+	 					+ '<div class="title" ng-click="toggle()">{{title}}</div>'
+	 					+ '<div class="body" ng-show="showMe" ng-transclude></div>'
+	 					+'</div>',
+	 			link: function(scope, element, attrs) {
+	 				scope.showMe = false;
+	 				scope.toggle = function() {
+	 					scope.showMe = !scope.showMe;
+	 				}
+	 			}
+	 		}
+	 	})
+	</script>
+</body>
+</html>

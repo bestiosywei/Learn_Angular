@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>自定义指令</title>
+	<script src="../lib/angular.js"></script>
+	<script src="custom_directive02.js"></script>
+</head>
+<body>
+	<div ng-controller="someController">
+		<accordion>
+			<expander ng-repeat="expander in expanders" expander-title="expander.title">
+				{{expander.text}}
+			</expander>
+		</accordion>
+	</div>
+</body>
+</html>

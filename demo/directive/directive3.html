@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>内置指令的应用</title>
+	<script src="../lib/angular.js"></script>
+	<style>
+		 .my-form {
+		   transition:all linear 0.5s;
+		   background: transparent;
+		 }
+		 .my-form.ng-invalid {
+		   background: red;
+		 }
+	</style>
+</head>
+<body>
+	<form name="myForm" ng-controller="FormController" class="my-form">
+	  userType: <input name="input" ng-model="userType" required>
+	  <span class="error" ng-show="myForm.input.$error.required">Required!</span><br>
+	  <code>userType = {{userType}}</code><br>
+	  <code>myForm.input.$valid = {{myForm.input.$valid}}</code><br>
+	  <code>myForm.input.$error = {{myForm.input.$error}}</code><br>
+	  <code>myForm.$valid = {{myForm.$valid}}</code><br>
+	  <code>myForm.$error.required = {{!!myForm.$error.required}}</code><br>
+	 </form>
+	<script>
+	 	var myApp = angular.module('myApp', []);
+	 	myApp.controller('FormController', ['$scope', function($scope){
+	 		$scope.userType = 'guest';
+	 	}]);
+	</script>
+</body>
+</html>

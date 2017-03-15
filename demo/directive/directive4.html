@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>内置指令的应用</title>
+	<script src="../lib/angular.js"></script>
+	<style>
+		div[contentEditable] {
+			cursor: pointer;
+			background-color: #ccc;
+		}
+	</style>
+</head>
+<body>
+	<div contentEditable="true" ng-model="content" title="check to edit">some</div>
+	<pre>model={{content}}</pre>
+	<script>
+	 	var myApp = angular.module('myApp', []);
+	 	// 属性在html为驼峰式命名----在js中全部为小写
+	 	myApp.directive('contenteditable', function(){
+	 		return {
+	 			require: 'ngModel',
+	 			link: function(scope, element, attrs, ctrl) {
+	 				// view-model
+	 				element.bind('keyup', function(){
+	 					scope.$apply(function(){
+	 						ctrl.$setViewValue(element.text());
+	 					});
+	 				});
+
+	 				// model-view
+	 				ctrl.$render = function() {
+	 					element.html(ctrl.$viewValue);
+	 				};
+
+	 				// load init value from dom
+	 				ctrl.$setViewValue(element.html());
+	 			}
+	 		};
+	 	});
+	</script>
+</body>
+</html>

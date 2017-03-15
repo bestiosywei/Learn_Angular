@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>内置指令的应用</title>
+	<script src="../lib/angular.js"></script>
+</head>
+<body>
+	<form name="myForm" ng-submit="save()" ng-controller="testForm">
+		<input name="userName" type="text" ng-model="user.userName" required>
+		<input name="password" type="password" ng-model="user.password" required>
+		<input type="submit" ng-disabled="myForm.$invalid">
+	</form>
+	<script>
+	 	var myApp = angular.module('myApp', []);
+	 	myApp.controller('testForm', ['$scope', function($scope){
+	 		$scope.user = {
+	 			userName: 'anan',
+	 			password: '123456789'
+	 		};
+	 		$scope.save = function() {
+	 			console.log('数据保存了...');
+	 		}
+	 	}]);
+	</script>
+</body>
+</html>
