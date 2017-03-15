@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>filter</title>
+	<script src="../lib/angular.js"></script>
+</head>
+<body>
+	{{1304375948024 | date}}
+	<br>
+	{{1304375948024 | date: "MM/dd/yyyy @ h:mma"}}
+	<br>
+	{{1304375948024 | date: "yyyy-MM-dd hh:mm:ss"}}
+	<script>
+	 	var myApp = angular.module('myApp', []);	
+	</script>
+</body>
+</html>

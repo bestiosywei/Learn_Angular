@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>自定义filter</title>
+	<script src="../lib/angular.js"></script>
+</head>
+<body>
+	{{'ann' | filter1}}
+	<script>
+	 	var myApp = angular.module('myApp', []);
+	 	myApp.filter('filter1', function(){
+	 		return function(item){
+	 			return item + 'o(n_n)o';
+	 		}
+	 	});	
+	</script>
+</body>
+</html>

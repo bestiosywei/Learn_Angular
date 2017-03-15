@@ -1,0 +1,26 @@
+{
+  "name": "bookstore",
+  "version": "1.0.0",
+  "description": "angular的综合练习",
+  "private": true,
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "angular1.x的练习"
+  ],
+  "author": "ann0707",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-jshint": "^2.0.4",
+    "gulp-uglify": "^2.1.0",
+    "jshint": "^2.9.4"
+  }
+}
