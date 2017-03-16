@@ -1,5 +1,12 @@
-<ul>
-	<li ng-repeat="book in books">
-		书名：{{book.title}}&nbsp;&nbsp;&nbsp;作者{{book.author}}
-	</li>
-</ul>
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<div ui-view="booktype">
+				书籍类型加载中...
+			</div>
+			<div ui-view="bookgrid">
+				书籍列表加载中...
+			</div>
+		</div>
+	</div>
+</div>

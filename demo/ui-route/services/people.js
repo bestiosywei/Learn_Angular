@@ -8,14 +8,16 @@ angular.module('hellosolarsystem').service('PeopleService', function($http) {
     
     getPerson: function(id) {
       function personMatchesParam(person) {
+        console.log(person.id === id)
         return person.id === id;
+
       }
       
       return service.getAllPeople().then(function (people) {
         return people.find(personMatchesParam)
       });
     }
-  }
+  };
   
   return service;
 })
