@@ -3,21 +3,10 @@
  * @type {[type]}
  */
 
-var booklistModule = angular.module('BookListCtrl', []);
-booklistModule.controller('BookListCtrl', ['$scope', '$http', '$state', '$statePara','ui.grid.pagination',
- function($scope, $http, $state, $statePara, ui.grid.pagination){
+var BookListModule = angular.module('BookListModule', []);
+BookListModule.controller('BookListCtrl', ['$scope', '$http', '$state', '$stateParams',
+ function($scope, $http, $state, $stateParas){
 	
-
-
-
-var getPage = function(curPage, pageSize) {
-        var firstRow = (curPage - 1) * pageSize;
-        $scope.gridOptions.totalItems = mydefalutData.length;
-        $scope.gridOptions.data = mydefalutData.slice(firstRow, firstRow + pageSize);
-};
-getPage(1, $scope.gridOptions.paginationPageSize);
- 	
-
 //ui-grid
  $scope.gridOptions = {
     data: 'books',
@@ -83,3 +72,10 @@ getPage(1, $scope.gridOptions.paginationPageSize);
 
 
 }]);
+
+
+var BookDetailModule = angular.module('BookDetailModule', []);
+BookDetailModule.controller('BookDtailCtrl', ['$scope', '$http', '$state', '$stateParams',
+ function($scope, $http, $state, $statePara){
+  console.log('cc');
+  }]);
