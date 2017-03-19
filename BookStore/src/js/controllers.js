@@ -15,7 +15,7 @@ BookListModule.controller('BookListCtrl', ['$scope', '$http', '$state', '$stateP
  * @param  {[type]} searchText [搜索的关键字]
  */
 
-  $scope.getPagedDataAsync = function(pageSize, page, searchText) {
+  $scope.getPagedDataAsync = function(page, pageSize, searchText) {
       setTimeout(function() {
           var data;
           if (searchText) {
@@ -24,6 +24,7 @@ BookListModule.controller('BookListCtrl', ['$scope', '$http', '$state', '$stateP
               // 得到json文件
               $http.get('data/books' + $stateParams.bookType + '.json')
                   .then(function(response) {
+
                     // 成功的话
                       data = response.data.filter(function(item) {
                         // 如果找到的话，返回true
@@ -70,9 +71,9 @@ BookListModule.controller('BookListCtrl', ['$scope', '$http', '$state', '$stateP
 	
 //利用后台数据ui-grid,填充表格
      $scope.gridOptions = {
+        //注意，这些field的值要与json字段一一对应才能显示出来
         columnDefs: [{ field: 'index', 
                        displayName: '序号', 
-                       width: '10%', 
                        enableColumnMenu: false,// 是否显示列头部菜单按钮
                        enableHiding: false,
                        suppressRemoveSort: true,
@@ -84,7 +85,7 @@ BookListModule.controller('BookListCtrl', ['$scope', '$http', '$state', '$stateP
                     { field: "author",
                       displayName: '作者'
                 	 },
-                    { field: "publicTime",
+                    { field: "pubTime",
                       displayName: '出版日期'
                 	 },
                     { field: "price",
@@ -93,7 +94,7 @@ BookListModule.controller('BookListCtrl', ['$scope', '$http', '$state', '$stateP
                 	 },	 
                     { field: "bookId",
                       displayName: '操作',
-                      cellTemplate: '<div><a ui-sref="bookdetail({bookId:row.getProperty(col.field)})" id="{{row.getProperty(col.field)}}">详情</a></div>'
+                      cellTemplate: '<div><a ui-sref="bookdetail({bookId:grid.getCellValue(row, col)})">详情</a></div>'
                     }
                     ],
                     
