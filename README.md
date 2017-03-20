@@ -15,6 +15,8 @@
 * MVC
 * 路由（ui-route）
 * 双向数据绑定
+* 模块
+* 依赖注入
 * 指令
 * service
 * provider
