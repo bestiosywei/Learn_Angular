@@ -1,9 +1,9 @@
-<div class="well" ng-controller="BookDtailCtrl">
+<div class="well" ng-controller="BookDetailCtrl">
 	<div class="row">
 		<div class="col-md-3">
 			<div class="row">
 				<div class="col-md-12">
-					<img src="" alt="用AngularJS开发下一代WEB应用">
+					书名：{{details.name}}
 				</div>
 			</div>
 			<div class="row">
@@ -15,7 +15,9 @@
 		<div class="col-md-9">
 			<div class="row">
 				<div class="col-md-12">
-					hello world
+					<div>作者：{{details.author}}</div>
+					<div>出版时间：{{details.pubTime}}</div>
+					<div>价格：{{details.price }}</div>
 				</div>
 			</div>
 		</div>

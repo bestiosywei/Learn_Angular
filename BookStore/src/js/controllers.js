@@ -1,4 +1,23 @@
 /**
+ * 这里是注册模块的
+ */
+
+var loginModule = angular.module('loginModule', []);
+loginModule.controller('loginCtrl', ['$scope', function($scope){
+    $scope.userInfo = {
+        email: '674986077@qq.com',
+        password: '12345679'
+    };
+    $scope.setFormData = function(){
+        $scope.userInfo = {
+            email: '',
+            password: ''
+        };
+    };
+}]);
+
+
+/**
  * 这里是书籍列表模块
  * @type {[type]}
  */
@@ -124,8 +143,43 @@ BookListModule.controller('BookListCtrl', ['$scope', '$http', '$state', '$stateP
 }]);
 
 
+/**
+ * 书籍的详情模块
+ * @type {[type]}
+ */
 var BookDetailModule = angular.module('BookDetailModule', []);
-BookDetailModule.controller('BookDtailCtrl', ['$scope', '$http', '$state', '$stateParams',
- function($scope, $http, $state, $statePara){
-  console.log('cc');
-  }]);
+BookDetailModule.controller('BookDetailCtrl', ['$scope', '$http', '$state', '$stateParams',
+ function($scope, $http, $state, $stateParams){
+
+var bookId = $stateParams.bookId;
+
+$scope.getDetailDataAsync = function(bookId) {
+    setTimeout(function() {
+        $http.get('data/books0.json')
+            .then(function(response) {
+               $scope.details = response.data.filter(function(item){
+                     return item.bookId == bookId;
+                })[0];
+               //返回的是一个数组，里面只有一个对象，[0]取出这个对象
+            }, function(){
+              console.log('http的get请求失败' + response.status);
+            });
+    }, 100);
+};
+
+$scope.getDetailDataAsync(bookId);
+
+}]);
+
+
+
+/**
+ * 添加书籍的模块
+ */
+
+ var addBookModule = angular.module('addBookModule', []);
+ addBookModule.controller('addBookCtrl', ['$scope', function($scope){
+     $scope.emptyData = function() {
+        $scope.book = {};
+     }
+ }]);
