@@ -4,7 +4,7 @@
       <img [src]="imgUrl">
       <div class="caption">
         <span class="pull-right">{{product.price}}元</span>
-        <h4><a href="#">{{product.title}}</a></h4>
+        <h4><a [routerLink]="['/product', product.title]">{{product.title}}</a></h4>
         <p>{{product.desc}}</p>
       </div>
       <app-star [rating]="product.rating"></app-star>

@@ -1,8 +1,11 @@
-<a [routerLink]="['/home']">主页</a>
-<a [routerLink]="['/product', 1]">商品详情</a>
-<button (click)="goToProduct()">跳到商品详情</button>
-<a [routerLink]="[{outlets: {aux: 'chat'}}]">开始聊天</a>
-<a [routerLink]="[{outlets: {aux: null}}]">结束聊天</a>
+<div class="index">
+  <a [routerLink]="['/home']">主页</a>
+  <a [routerLink]="['/product', 1]">商品详情</a>
+  <button (click)="goToProduct()">跳到商品详情</button>
+  <a [routerLink]="[{outlets: {aux: 'chat'}}]">开始聊天</a>
+  <a [routerLink]="[{outlets: {aux: null}}]">结束聊天</a>
+</div>
+
 
 <!-- 这个就是router-view,在angular中名字是一个插座 -->
 <router-outlet></router-outlet>

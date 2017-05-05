@@ -1,6 +1,7 @@
 .home {
+  float: left;
   width: 70%;
   height: 100px;
+  color: #fff;
   background: blue;
-  float: left;
 }
