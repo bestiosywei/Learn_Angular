@@ -25,7 +25,7 @@ import { LoggerService } from './share/logger.service';
   providers: [
   {
     provide: ProductService,
-    useFactory: (logger: LoggerService, appConfig) => {
+    useFactory: (logger, appConfig) => {
       if (appConfig.isDev) {
         return new ProductService(logger);
       }else {

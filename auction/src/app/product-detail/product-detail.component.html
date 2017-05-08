@@ -1,3 +1,22 @@
-<img src="http://placehold.it/820x230">
-<h3>{{productTitle}}</h3>
+<div class="thumbnail">
+  <img src="http://placehold.it/820x230">
+  <h4>{{product.title}}<span>{{product.price}}元</span></h4>
+  <p>{{product.desc}}</p>
+  <div>
+    <p class="pull-right">{{comments.length}}</p>
+    <div>
+      <app-star></app-star>
+    </div>
+  </div>
+</div>
 
+<div class="well">
+  <div class="row" *ngFor="let comment of comments">
+    <div class="col-md-12">
+      <app-star [rating]="comment.rating"></app-star>
+      <span>{{comment.username}}</span>
+      <span class="pull-right">{{comment.timestamp}}</span>
+      <p>{{comment.content}}</p>
+    </div>
+  </div>
+</div>

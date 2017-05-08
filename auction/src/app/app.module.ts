@@ -16,10 +16,11 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { HomeComponent } from './home/home.component';
 import { Routes } from '@angular/router';
+import { ProductService } from './share/product.service';
 
 const routeConfig: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'product/:productTitle', component: ProductDetailComponent}
+  {path: 'product/:productId', component: ProductDetailComponent}
 ];
 
 @NgModule({
@@ -41,7 +42,7 @@ const routeConfig: Routes = [
     Ng2BootstrapModule.forRoot(),
     RouterModule.forRoot(routeConfig)
   ],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
