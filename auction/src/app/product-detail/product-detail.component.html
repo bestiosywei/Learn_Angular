@@ -3,14 +3,28 @@
   <h4>{{product.title}}<span>{{product.price}}元</span></h4>
   <p>{{product.desc}}</p>
   <div>
-    <p class="pull-right">{{comments.length}}</p>
+    <p class="pull-right">评价人数{{comments.length}}</p>
     <div>
-      <app-star></app-star>
+      <app-star [rating]="product.rating"></app-star>
     </div>
   </div>
 </div>
 
 <div class="well">
+  <div>
+    <button class="btn btn-success" (click)="isCommentHidden = !isCommentHidden">添加评价</button>
+  </div>
+  <div [hidden]="isCommentHidden">
+    <div>
+      <app-star [readonly]="false" [(rating)]="newRating"></app-star>
+    </div>
+    <div>
+      <textarea [(ngModel)]="newComment"></textarea>
+    </div>
+    <div>
+      <button class="btn btn-success" (click)="addComment()">提交</button>
+    </div>
+  </div>
   <div class="row" *ngFor="let comment of comments">
     <div class="col-md-12">
       <app-star [rating]="comment.rating"></app-star>

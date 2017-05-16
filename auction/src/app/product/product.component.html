@@ -1,5 +1,12 @@
 <div class="product">
-  <div *ngFor="let product of products" class="col-md-4">
+  <div class="col-md-12">
+    <div class="form-group">
+    <!-- input中的值发生改变，titlFilter就会发射一系列事件
+    而我们就要订阅这个事件 -->
+      <input type="text" class="form-control" placeholder="请输入商品名称" [formControl]="titleFilter">
+    </div>
+  </div>
+  <div *ngFor="let product of products | filter: 'title' :keyword" class="col-md-4">
     <div class="thumbnail">
       <img [src]="imgUrl">
       <div class="caption">
