@@ -1,0 +1,42 @@
+<!-- <div>
+  <h2>这是父组件的内容</h2>
+  <p>股票代码{{priceQuote.stockCode}}</p>
+  <p>股票报价{{priceQuote.lastPrice | number: '2.2-4'}}</p>
+</div> 
+<input type="text" [(ngModel)]="stock" placeholder="请输入股票代码">
+<app-order [stockCode]="stock" [amount]="100"></app-order> 
+<app-price-quote (lastPrice)="priceQuoteHandler($event)"></app-price-quote> 
+<div>
+  <app-price-quote (buy)="buyHandler($event)"></app-price-quote>
+  <app-order [priceQuote]="priceQuote"></app-order> 
+</div> 
+<div class="parent">
+  <h2>我是父组件</h2>
+  <div>
+    问候语: <input type="text" [(ngModel)]="greeting">
+  </div>
+  <div>
+    姓名: <input type="text" [(ngModel)]="user.name">
+  </div>
+  <app-child [greeting]="greeting" [user]="user"></app-child>
+</div>
+<app-life #child1></app-life>
+<app-life #child2></app-life>
+<button (click)="child2.greeting('jerry')">调用child2的greeting方法</button> 
+<div>{{message}}</div>
+<div class="wrapper">
+  <h2>我是父组件的</h2>
+  <div>这个div定义在父组件中</div>
+  <app-child1>
+    <div class="header">页头，这个div是父组件投影到子组件的{{title}}</div>
+    <div class="footer">页尾，这个div是父组件投影到子组件的</div>
+  </app-child1>
+</div>
+
+<div [innerHTML]="divContent"></div>
+-->
+<div>
+  <a [routerLink]="['./']">life</a>
+  <a [routerLink]="['./child']">child</a>
+</div>
+<router-outlet></router-outlet>
