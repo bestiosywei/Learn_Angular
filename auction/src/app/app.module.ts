@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { LocationStrategy, HashLocationStrategy} from '@angular/common';
 
 import { Ng2BootstrapModule } from 'ngx-bootstrap';
 
@@ -20,6 +21,7 @@ import { Routes } from '@angular/router';
 import { ProductService } from './share/product.service';
 import { MultiplePipe } from './pipe/multiple.pipe';
 import { FilterPipe } from './pipe/filter.pipe';
+import { WebSocketService } from './share/web-socket.service';
 
 const routeConfig: Routes = [
   {path: '', component: HomeComponent},
@@ -38,7 +40,7 @@ const routeConfig: Routes = [
     ProductDetailComponent,
     HomeComponent,
     MultiplePipe,
-    FilterPipe
+    FilterPipe,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,9 @@ const routeConfig: Routes = [
     Ng2BootstrapModule.forRoot(),
     RouterModule.forRoot(routeConfig)
   ],
-  providers: [ProductService],
+  providers: [ProductService, WebSocketService, {
+    provide:LocationStrategy, useClass: HashLocationStrategy
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
